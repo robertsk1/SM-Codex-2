@@ -34,7 +34,7 @@ export class RJWBrainEngine {
   }
 
   private loadKnowledge(): Knowledge {
-    const knowledgeDir = path.join(process.cwd(), 'knowledge');
+    const knowledgeDir = path.resolve(process.cwd(), 'knowledge');
     try {
       return {
         manifesto: fs.readFileSync(path.join(knowledgeDir, '01_manifesto.md'), 'utf-8'),
