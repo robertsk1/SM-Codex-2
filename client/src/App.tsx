@@ -43,7 +43,7 @@ function App() {
     });
     
     newSocket.on('message', (message: ChatMessage) => {
-      setMessages(prev => [...prev, message]);
+      setMessages((prev: ChatMessage[]) => [...prev, message]);
     });
     
     fetchSession();
@@ -132,15 +132,14 @@ function App() {
     <div className="app">
       <div className="sacred-geometry-overlay">
         <div className="flower-of-life"></div>
+        <div className="metatrons-cube"></div>
         <div className="triangle sacred"></div>
         <div className="triangle sacred"></div>
         <div className="triangle sacred"></div>
       </div>
       
       <div className="crystal-center">
-        <div className="lemurian-crystal" style={{ 
-          boxShadow: `0 0 ${20 + tetraState.crystalPulse * 30}px ${tetraState.crystalPulse * 5}px #FFD700` 
-        }}>
+        <div className="lemurian-crystal">
           <span className="cache-key">{CACHE_KEY}</span>
         </div>
       </div>
@@ -188,7 +187,7 @@ function App() {
           </div>
           
           <div className="messages-container">
-            {messages.map(msg => (
+            {messages.map((msg: ChatMessage) => (
               <div key={msg.id} className={`message ${msg.type} ${msg.userId === user?.id ? 'own' : ''}`}>
                 <span className="message-author">{msg.username}:</span>
                 <span className="message-content">{msg.content}</span>
