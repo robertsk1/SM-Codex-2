@@ -4,7 +4,7 @@
     {
       "src": "server/serverless.ts",
       "use": "@vercel/node",
-      "config": { "includeFiles": ["shared/**"] }
+      "config": { "includeFiles": ["shared/**", "knowledge/**"] }
     },
     {
       "src": "package.json",

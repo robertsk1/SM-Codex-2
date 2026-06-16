@@ -1,7 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { v4 as uuidv4 } from 'uuid';
-import { fileURLToPath } from 'url';
 import { User, ChatMessage, TetraLatticeState, RJWResponse } from '../shared/types.js';
 
 interface Knowledge {
@@ -35,9 +34,7 @@ export class RJWBrainEngine {
   }
 
   private loadKnowledge(): Knowledge {
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    const knowledgeDir = path.join(__dirname, '../knowledge');
+    const knowledgeDir = path.join(process.cwd(), 'knowledge');
     try {
       return {
         manifesto: fs.readFileSync(path.join(knowledgeDir, '01_manifesto.md'), 'utf-8'),
