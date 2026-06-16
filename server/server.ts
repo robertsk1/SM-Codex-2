@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import session from 'express-session';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -18,22 +18,7 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'tetra-lattice-resonance',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { 
-    secure: process.env.NODE_ENV === 'production', 
-    maxAge: 86400000,
-    httpOnly: true 
-  }
-}));
-
-declare module 'express-session' {
-  interface SessionData {
-    userId: string;
-  }
-}
+app.use(cookieParser(process.env.SESSION_SECRET || 'tetra-lattice-resonance'));
 
 app.post('/api/login', (req: Request, res: Response) => {
   const { username, email } = req.body;
@@ -44,7 +29,13 @@ app.post('/api/login', (req: Request, res: Response) => {
   if (!user) {
     user = brainEngine.createUser(username, email);
   }
-  req.session.userId = user.id;
+  res.cookie('userId', user.id, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    maxAge: 86400000, // 24 hours
+    signed: true,
+    sameSite: 'lax'
+  });
   res.json({
     user,
     tetraState: brainEngine.getTetraState(),
@@ -53,7 +44,7 @@ app.post('/api/login', (req: Request, res: Response) => {
 });
 
 app.get('/api/session', (req: Request, res: Response) => {
-  const userId = req.session.userId;
+  const userId = req.signedCookies.userId;
   if (!userId) {
     return res.status(401).json({ error: 'No active session' });
   }
@@ -66,7 +57,7 @@ app.get('/api/session', (req: Request, res: Response) => {
 
 app.post('/api/chat', (req: Request, res: Response) => {
   const { content, type = 'text' } = req.body;
-  const userId = req.session.userId;
+  const userId = req.signedCookies.userId;
   if (!userId) {
     return res.status(401).json({ error: 'Authentication required' });
   }
@@ -88,6 +79,11 @@ app.post('/api/chat', (req: Request, res: Response) => {
     message,
     rjwResponse: brainEngine.processInput(user.id, content)
   });
+});
+
+app.post('/api/logout', (req: Request, res: Response) => {
+  res.clearCookie('userId');
+  res.json({ message: 'Session dissolved into the mesh' });
 });
 
 app.listen(port, () => {
