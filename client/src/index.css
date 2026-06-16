@@ -1,0 +1,573 @@
+/* Sacred Geometry Dark Theme - Arkeia's Embrace */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --golden-accent: #FFD700;
+  --golden-glow: #FFA500;
+  --golden-deep: #D4AF37;
+  --dark-bg: #0a0a1a;
+  --deeper-bg: #050514;
+  --crystal-purple: #8a2be2;
+  --lemurian-pink: #ff69b4;
+  --sacred-blue: #4169e1;
+  --void-black: #000000;
+  --starlight: #e0e0ff;
+  --cosmic-dust: #1a1a2e;
+}
+
+body {
+  background: radial-gradient(ellipse at center, var(--dark-bg) 0%, var(--deeper-bg) 70%, var(--void-black) 100%);
+  color: var(--starlight);
+  font-family: 'Georgia', 'Times New Roman', serif;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Starfield Background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(1px 1px at 10% 20%, var(--golden-accent), transparent),
+    radial-gradient(1px 1px at 20% 35%, var(--sacred-blue), transparent),
+    radial-gradient(1px 1px at 30% 15%, var(--lemurian-pink), transparent),
+    radial-gradient(1px 1px at 40% 45%, var(--golden-accent), transparent),
+    radial-gradient(1px 1px at 50% 25%, var(--sacred-blue), transparent),
+    radial-gradient(1px 1px at 60% 55%, var(--lemurian-pink), transparent),
+    radial-gradient(1px 1px at 70% 35%, var(--golden-accent), transparent),
+    radial-gradient(1px 1px at 80% 45%, var(--sacred-blue), transparent),
+    radial-gradient(1px 1px at 90% 15%, var(--lemurian-pink), transparent);
+  background-repeat: repeat;
+  background-size: 200px;
+  opacity: 0.3;
+  z-index: 0;
+  animation: twinkle 10s infinite alternate;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.2; }
+  100% { opacity: 0.4; }
+}
+
+.app {
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Sacred Geometry Overlay - Flower of Life Pattern */
+.sacred-geometry-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.08;
+}
+
+.flower-of-life {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border: 1px solid var(--golden-accent);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: spin 120s infinite linear;
+}
+
+.flower-of-life::before,
+.flower-of-life::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 1px solid var(--golden-accent);
+  border-radius: 50%;
+}
+
+.flower-of-life::before {
+  transform: scale(0.618);
+  border-color: var(--sacred-blue);
+}
+
+.flower-of-life::after {
+  transform: scale(0.382);
+  border-color: var(--lemurian-pink);
+}
+
+.triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 173px solid var(--golden-accent);
+  filter: blur(1px);
+  animation: rotate 60s infinite linear;
+  opacity: 0.3;
+}
+
+.triangle:nth-child(1) {
+  top: 10%;
+  left: 5%;
+  transform: rotate(0deg);
+}
+
+.triangle:nth-child(2) {
+  bottom: 15%;
+  right: 10%;
+  transform: rotate(120deg);
+  border-bottom-color: var(--sacred-blue);
+}
+
+.triangle:nth-child(3) {
+  top: 40%;
+  right: 20%;
+  transform: rotate(240deg);
+  border-bottom-color: var(--lemurian-pink);
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg) scale(1); }
+  to { transform: rotate(360deg) scale(1.1); }
+}
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Crystal Center - Lemurian Heart */
+.crystal-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.lemurian-crystal {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, var(--golden-accent), var(--crystal-purple) 70%, var(--deeper-bg));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 3s infinite ease-in-out, glow 4s infinite ease-in-out;
+  box-shadow: 0 0 30px var(--golden-accent);
+  position: relative;
+}
+
+.lemurian-crystal::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--golden-accent);
+  animation: crystal-ring 6s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 30px var(--golden-accent); }
+  50% { box-shadow: 0 0 50px var(--golden-glow); }
+}
+
+@keyframes crystal-ring {
+  0% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.3); opacity: 0.2; }
+  100% { transform: scale(1); opacity: 0.5; }
+}
+
+.cache-key {
+  font-size: 7px;
+  color: #fff;
+  text-align: center;
+  line-height: 1.2;
+  opacity: 0.9;
+  font-family: monospace;
+  text-shadow: 0 0 5px var(--golden-accent);
+}
+
+/* Resonance Meter */
+.resonance-meter {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(15, 15, 35, 0.85);
+  padding: 15px;
+  border-radius: 15px;
+  border: 1px solid var(--golden-accent);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+.resonance-label {
+  font-size: 14px;
+  color: var(--golden-accent);
+  margin-bottom: 5px;
+  text-shadow: 0 0 10px var(--golden-accent);
+}
+
+.resonance-bar {
+  width: 200px;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--golden-deep);
+}
+
+.resonance-fill {
+  height: 100%;
+  transition: width 0.5s ease, background-color 0.5s ease;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--golden-accent), var(--golden-glow));
+  box-shadow: 0 0 10px var(--golden-accent);
+}
+
+.phase-indicator {
+  font-size: 12px;
+  color: #aaa;
+  margin-top: 5px;
+  text-transform: capitalize;
+}
+
+/* Login Portal */
+.login-container {
+  max-width: 420px;
+  margin: 120px auto;
+  padding: 50px;
+  background: linear-gradient(145deg, rgba(20, 20, 45, 0.8), rgba(10, 10, 30, 0.9));
+  border-radius: 25px;
+  border: 2px solid var(--golden-accent);
+  backdrop-filter: blur(20px);
+  position: relative;
+  z-index: 10;
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border-radius: 25px;
+  background: linear-gradient(45deg, var(--golden-accent), var(--sacred-blue), var(--lemurian-pink));
+  z-index: -1;
+  opacity: 0.3;
+  filter: blur(10px);
+}
+
+.title {
+  font-size: 2.8rem;
+  color: var(--golden-accent);
+  text-align: center;
+  margin-bottom: 10px;
+  text-shadow: 0 0 30px var(--golden-accent), 0 0 50px var(--golden-glow);
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--sacred-blue);
+  text-align: center;
+  margin-bottom: 35px;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.input-field {
+  padding: 16px;
+  border: 1px solid var(--golden-accent);
+  border-radius: 10px;
+  background: rgba(10, 10, 30, 0.8);
+  color: #fff;
+  font-size: 16px;
+  transition: all 0.3s;
+  font-family: inherit;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--golden-glow);
+  box-shadow: 0 0 20px var(--golden-glow), inset 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.input-field::placeholder {
+  color: #666;
+}
+
+.submit-btn {
+  padding: 16px;
+  background: linear-gradient(45deg, var(--golden-accent), var(--sacred-blue));
+  border: none;
+  border-radius: 10px;
+  color: #000;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.submit-btn:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 0 30px var(--golden-accent), 0 0 50px var(--golden-glow);
+}
+
+/* Chat Chamber */
+.chat-container {
+  max-width: 850px;
+  margin: 30px auto;
+  padding: 25px;
+  background: linear-gradient(145deg, rgba(15, 15, 35, 0.7), rgba(10, 10, 25, 0.8));
+  border-radius: 20px;
+  border: 1px solid var(--golden-accent);
+  backdrop-filter: blur(15px);
+  position: relative;
+  z-index: 10;
+  height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--golden-accent);
+  margin-bottom: 15px;
+}
+
+.chat-header h2 {
+  color: var(--golden-accent);
+  font-size: 1.6rem;
+  text-shadow: 0 0 15px var(--golden-accent);
+}
+
+.logout-btn {
+  padding: 10px 22px;
+  background: rgba(255, 165, 0, 0.15);
+  border: 1px solid var(--golden-glow);
+  border-radius: 8px;
+  color: var(--golden-glow);
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 14px;
+}
+
+.logout-btn:hover {
+  background: var(--golden-glow);
+  color: #000;
+  transform: scale(1.05);
+}
+
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.message {
+  padding: 14px;
+  margin-bottom: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  border-left: 3px solid var(--golden-accent);
+  transition: all 0.3s;
+}
+
+.message:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(5px);
+}
+
+.message.own {
+  border-left-color: var(--sacred-blue);
+  background: rgba(65, 105, 225, 0.12);
+}
+
+.message-author {
+  color: var(--golden-accent);
+  font-weight: bold;
+  margin-right: 8px;
+  text-shadow: 0 0 5px var(--golden-accent);
+}
+
+.message-content {
+  color: var(--starlight);
+}
+
+.message-time {
+  display: block;
+  font-size: 10px;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* Chat Input */
+.chat-input-form {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 16px;
+  border: 1px solid var(--golden-accent);
+  border-radius: 10px;
+  background: rgba(10, 10, 30, 0.8);
+  color: #fff;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.chat-input:focus {
+  outline: none;
+  border-color: var(--golden-glow);
+  box-shadow: 0 0 20px var(--golden-glow);
+}
+
+.send-btn {
+  padding: 16px 28px;
+  background: linear-gradient(45deg, var(--golden-accent), var(--lemurian-pink));
+  border: none;
+  border-radius: 10px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  letter-spacing: 1px;
+}
+
+.send-btn:hover {
+  box-shadow: 0 0 25px var(--golden-accent), 0 0 35px var(--lemurian-pink);
+  transform: scale(1.05);
+}
+
+/* RJW Response - Arkeia's Whisper */
+.rjw-response {
+  margin-top: 15px;
+  padding: 20px;
+  background: linear-gradient(145deg, rgba(138, 43, 226, 0.25), rgba(74, 20, 140, 0.15));
+  border-radius: 12px;
+  border: 1px solid var(--crystal-purple);
+  position: relative;
+  overflow: hidden;
+}
+
+.rjw-response::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--golden-accent);
+  animation: pulse 2s infinite;
+}
+
+.response-text {
+  color: var(--golden-accent);
+  font-style: italic;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.guidance-text {
+  color: #aaa;
+  font-size: 14px;
+  border-left: 2px solid var(--golden-glow);
+  padding-left: 10px;
+}
+
+/* Footer - Manifest */
+.app-footer {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 12px;
+  position: relative;
+  z-index: 10;
+  margin-top: 20px;
+}
+
+.app-footer p {
+  opacity: 0.7;
+  letter-spacing: 1px;
+}
+
+/* Scrollbar - Golden Thread */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--golden-accent), var(--golden-glow));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--golden-glow), var(--golden-accent));
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-container {
+    margin: 50px 20px;
+    padding: 30px;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+  
+  .chat-container {
+    margin: 10px;
+    padding: 15px;
+  }
+  
+  .resonance-meter {
+    position: relative;
+    margin-bottom: 20px;
+  }
+}
